@@ -1,12 +1,12 @@
 import {
-	BarChart,
+	BarChart2,
 	CheckSquare,
-	Cog,
 	Flag,
 	Home,
+	Layers,
 	LifeBuoy,
 	Search,
-	SquareStack,
+	Settings,
 	Users,
 } from 'lucide-react'
 import * as Input from '@/components/input'
@@ -27,8 +27,8 @@ export function Sidebar() {
 
 			<nav className="space-y-0.5">
 				<NavItem title="Home" icon={Home} />
-				<NavItem title="Dashboard" icon={BarChart} />
-				<NavItem title="Projects" icon={SquareStack} />
+				<NavItem title="Dashboard" icon={BarChart2} />
+				<NavItem title="Projects" icon={Layers} />
 				<NavItem title="Tasks" icon={CheckSquare} />
 				<NavItem title="Reporting" icon={Flag} />
 				<NavItem title="Users" icon={Users} />
@@ -37,7 +37,7 @@ export function Sidebar() {
 			<div className="mt-auto flex flex-col gap-6">
 				<nav className="space-y-0.5">
 					<NavItem title="Support" icon={LifeBuoy} />
-					<NavItem title="Settings" icon={Cog} />
+					<NavItem title="Settings" icon={Settings} />
 				</nav>
 
 				<UsedSpaceWidget />

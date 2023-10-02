@@ -15,6 +15,9 @@ type InputFieldProps = ComponentProps<'input'>
 
 export function Field({ ...props }: InputFieldProps) {
 	return (
-		<input className="flex-1 bg-transparent p-0 text-zinc-900 placeholder-zinc-600" />
+		<input
+			className="flex-1 bg-transparent p-0 text-zinc-900 placeholder-zinc-600"
+			{...props}
+		/>
 	)
 }
