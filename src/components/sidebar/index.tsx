@@ -9,7 +9,7 @@ import {
 	Settings,
 	Users,
 } from 'lucide-react'
-import * as Input from '@/components/input'
+import * as Input from '@/components/form/input'
 import { Logo } from './logo'
 import { NavItem } from './nav-item'
 import { Profile } from './profile'
