@@ -1,4 +1,4 @@
-import { Mail, User } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import * as FileInput from '@/components/form/file-input'
 import * as Input from '@/components/form/input'
 import { SettingsTabs } from '@/components/settings-tabs'
@@ -88,20 +88,15 @@ export default function Home() {
 							</span>
 						</label>
 
-						<div className="flex items-start gap-5">
-							<div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-50">
-								<User className="h-8 w-8 text-violet-500" />
-							</div>
-
-							<FileInput.Root>
-								<FileInput.Trigger htmlFor="photo">
-									<span className="text-xs">
-										SVG, PNG, JPG or GIF(max. 800x400px)
-									</span>
-								</FileInput.Trigger>
-								<FileInput.Field id="photo" accept="" />
-							</FileInput.Root>
-						</div>
+						<FileInput.Root className="flex items-start gap-5">
+							<FileInput.ImagePreview />
+							<FileInput.Trigger>
+								<span className="text-xs">
+									SVG, PNG, JPG or GIF(max. 800x400px)
+								</span>
+							</FileInput.Trigger>
+							<FileInput.Field accept="" />
+						</FileInput.Root>
 					</div>
 
 					<div className="grid grid-cols-form gap-3 py-5">
@@ -161,16 +156,14 @@ export default function Home() {
 							</span>
 						</label>
 
-						<div>
-							<FileInput.Root>
-								<FileInput.Trigger htmlFor="projects">
-									<span className="text-xs">
-										SVG, PNG, JPG or GIF(max. 800x400px)
-									</span>
-								</FileInput.Trigger>
-								<FileInput.Field id="projects" accept="" multiple />
-							</FileInput.Root>
-						</div>
+						<FileInput.Root>
+							<FileInput.Trigger>
+								<span className="text-xs">
+									SVG, PNG, JPG or GIF(max. 800x400px)
+								</span>
+							</FileInput.Trigger>
+							<FileInput.Field accept="" multiple />
+						</FileInput.Root>
 					</div>
 
 					<div className="flex items-center justify-end gap-2 pt-5">
