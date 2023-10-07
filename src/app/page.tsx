@@ -163,6 +163,7 @@ export default function Home() {
 								</span>
 							</FileInput.Trigger>
 							<FileInput.Field accept="" multiple />
+							<FileInput.FileList />
 						</FileInput.Root>
 					</div>
 

@@ -9,7 +9,7 @@ import {
 	useMemo,
 	useState,
 } from 'react'
-import { UploadCloud, User } from 'lucide-react'
+import { Trash2, UploadCloud, User } from 'lucide-react'
 import { formatBytes } from '@/utils/format-bytes'
 
 interface FileInputContextType {
@@ -62,14 +62,17 @@ export function Trigger({ children, ...props }: TriggerProps) {
 
 interface FieldProps extends Omit<ComponentProps<'input'>, 'type'> {}
 
-export function Field({ ...props }: FieldProps) {
-	const { id, onFilesChange } = useFileInput()
+export function Field({ multiple, ...props }: FieldProps) {
+	const { id, files, onFilesChange } = useFileInput()
 
 	function handleFilesChange(event: ChangeEvent<HTMLInputElement>) {
 		if (!event.target.files?.length) return
 
-		const files = Array.from(event.target.files)
-		onFilesChange(files)
+		const filesToAdd = multiple
+			? [...files, ...Array.from(event.target.files)]
+			: Array.from(event.target.files)
+
+		onFilesChange(filesToAdd)
 	}
 
 	return (
@@ -78,6 +81,7 @@ export function Field({ ...props }: FieldProps) {
 			id={id}
 			className="sr-only"
 			type="file"
+			multiple={multiple}
 			onChange={handleFilesChange}
 		/>
 	)
@@ -132,7 +136,22 @@ export function FileList() {
 								{formatBytes(file.size)}
 							</span>
 						</div>
+
+						<div className="flex w-full items-start gap-3">
+							<div className="h-2 flex-1 rounded-full bg-zinc-100">
+								<div className="h-2 w-4/5 rounded-full bg-violet-600" />
+							</div>
+							<span className="text-sm font-medium text-zinc-700">80%</span>
+						</div>
 					</div>
+
+					<button
+						className="ml-auto rounded-md p-2 hover:bg-zinc-50"
+						type="button"
+						title="Remove"
+					>
+						<Trash2 className="h-5 w-5 text-zinc-500" />
+					</button>
 				</div>
 			))}
 		</div>
