@@ -1,57 +1,50 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { Check, ChevronDown } from 'lucide-react'
-import * as SelectPrimitive from '@radix-ui/react-select'
+import * as Select from '@radix-ui/react-select'
 
-export function Select() {
+type SelectItemProps = Select.SelectItemProps
+
+export function Item({ children, ...props }: SelectItemProps) {
 	return (
-		<SelectPrimitive.Root>
-			<SelectPrimitive.Trigger className="flex h-11 w-full items-center justify-between gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm data-[placeholder]:text-zinc-600">
-				<SelectPrimitive.Value
-					className="text-black"
-					placeholder="Select a country"
-				/>
-				<SelectPrimitive.Icon>
-					<ChevronDown className="h-5 w-5 text-zinc-500" />
-				</SelectPrimitive.Icon>
-			</SelectPrimitive.Trigger>
+		<Select.Item
+			className="flex items-center justify-between gap-2 px-3 py-2.5 outline-none data-[highlighted]:bg-zinc-50"
+			{...props}
+		>
+			<Select.ItemText className="text-black">{children}</Select.ItemText>
 
-			<SelectPrimitive.Portal>
-				<SelectPrimitive.Content
-					className="z-10 w-[--radix-select-trigger-width] overflow-hidden rounded-lg border border-zinc-200 bg-white"
+			<Select.ItemIndicator>
+				<Check className="h-4 w-4 text-violet-500" />
+			</Select.ItemIndicator>
+		</Select.Item>
+	)
+}
+
+interface SelectProps extends Select.SelectProps {
+	placeholder?: string
+}
+
+export function Root({ children, placeholder, ...props }: SelectProps) {
+	return (
+		<Select.Root {...props}>
+			<Select.Trigger className="flex h-11 w-full items-center justify-between gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm data-[placeholder]:text-zinc-600">
+				<Select.Value className="text-black" placeholder={placeholder} />
+				<Select.Icon>
+					<ChevronDown className="h-5 w-5 text-zinc-500" />
+				</Select.Icon>
+			</Select.Trigger>
+
+			<Select.Portal>
+				<Select.Content
+					className="z-10 w-[--radix-select-trigger-width] overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
 					position="popper"
 					side="bottom"
 					sideOffset={8}
 				>
-					<SelectPrimitive.Viewport>
-						<SelectPrimitive.Item
-							className="flex items-center justify-between gap-2 px-3 py-2.5 outline-none data-[highlighted]:bg-zinc-50"
-							value="br"
-						>
-							<SelectPrimitive.ItemText className="text-black">
-								Brazil
-							</SelectPrimitive.ItemText>
-
-							<SelectPrimitive.ItemIndicator>
-								<Check className="h-4 w-4 text-violet-500" />
-							</SelectPrimitive.ItemIndicator>
-						</SelectPrimitive.Item>
-
-						<SelectPrimitive.Item
-							className="flex items-center justify-between gap-2 px-3 py-2.5 outline-none data-[highlighted]:bg-zinc-50"
-							value="ag"
-						>
-							<SelectPrimitive.ItemText className="text-black">
-								Argentina
-							</SelectPrimitive.ItemText>
-
-							<SelectPrimitive.ItemIndicator>
-								<Check className="h-4 w-4 text-violet-500" />
-							</SelectPrimitive.ItemIndicator>
-						</SelectPrimitive.Item>
-					</SelectPrimitive.Viewport>
-				</SelectPrimitive.Content>
-			</SelectPrimitive.Portal>
-		</SelectPrimitive.Root>
+					<Select.Viewport>{children}</Select.Viewport>
+				</Select.Content>
+			</Select.Portal>
+		</Select.Root>
 	)
 }

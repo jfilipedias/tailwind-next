@@ -1,8 +1,9 @@
-import { Mail } from 'lucide-react'
+import { Bold, Italic, Link, List, Mail, Underline } from 'lucide-react'
 import * as FileInput from '@/components/form/file-input'
 import * as Input from '@/components/form/input'
-import { Select } from '@/components/form/select'
+import * as Select from '@/components/form/select'
 import { SettingsTabs } from '@/components/settings-tabs'
+import { Textarea } from '@/components/form/text-area'
 
 export default function Home() {
 	return (
@@ -118,7 +119,10 @@ export default function Home() {
 							Country
 						</label>
 
-						<Select />
+						<Select.Root placeholder="Select a country">
+							<Select.Item value="br">Brazil</Select.Item>
+							<Select.Item value="sp">Spain</Select.Item>
+						</Select.Root>
 					</div>
 
 					<div className="grid grid-cols-form gap-3 py-5">
@@ -129,21 +133,72 @@ export default function Home() {
 							Timezone
 						</label>
 
-						<div></div>
+						<Select.Root placeholder="Select a timezone">
+							<Select.Item value="utc3">Brasília Time (UTC-03:00)</Select.Item>
+							<Select.Item value="utc8">
+								Pacific Standard Time (UTC-08:00)
+							</Select.Item>
+						</Select.Root>
 					</div>
 
 					<div className="grid grid-cols-form gap-3 py-5">
-						<label
-							htmlFor="photo"
-							className="text-sm font-medium text-zinc-700"
-						>
+						<label htmlFor="bio" className="text-sm font-medium text-zinc-700">
 							Bio
 							<span className="mt-0.5 block text-sm font-normal text-zinc-500">
 								Write a short introduction.
 							</span>
 						</label>
 
-						<div></div>
+						<div className="space-y-3">
+							<div className="grid grid-cols-2 gap-3">
+								<Select.Root defaultValue="txt">
+									<Select.Item value="txt">Normal Text</Select.Item>
+									<Select.Item value="html">HTML</Select.Item>
+									<Select.Item value="md">Markdown</Select.Item>
+								</Select.Root>
+
+								<div className="flex items-center gap-1">
+									<button
+										className="rounded-md p-2 hover:bg-zinc-50"
+										type="button"
+									>
+										<Bold className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+									</button>
+									<button
+										className="rounded-md p-2 hover:bg-zinc-50"
+										type="button"
+									>
+										<Italic className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+									</button>
+									<button
+										className="rounded-md p-2 hover:bg-zinc-50"
+										type="button"
+									>
+										<Underline
+											className="h-4 w-4 text-zinc-500"
+											strokeWidth={3}
+										/>
+									</button>
+									<button
+										className="rounded-md p-2 hover:bg-zinc-50"
+										type="button"
+									>
+										<Link className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+									</button>
+									<button
+										className="rounded-md p-2 hover:bg-zinc-50"
+										type="button"
+									>
+										<List className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+									</button>
+								</div>
+							</div>
+
+							<Textarea
+								id="bio"
+								defaultValue="I'm a product designer based in Melbourne, Australia. I specialized in UX/UI design, brand strategy, and Webflow development."
+							/>
+						</div>
 					</div>
 
 					<div className="grid grid-cols-form gap-3 py-5">
