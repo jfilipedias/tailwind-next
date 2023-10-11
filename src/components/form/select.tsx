@@ -37,7 +37,7 @@ export function Root({ children, placeholder, ...props }: SelectProps) {
 
 			<Select.Portal>
 				<Select.Content
-					className="z-10 w-[--radix-select-trigger-width] overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
+					className="animate-slide-down-and-fade z-10 w-[--radix-select-trigger-width] overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
 					position="popper"
 					side="bottom"
 					sideOffset={8}
