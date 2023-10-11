@@ -119,7 +119,7 @@ export default function Home() {
 							Country
 						</label>
 
-						<Select.Root placeholder="Select a country">
+						<Select.Root id="country" placeholder="Select a country">
 							<Select.Item value="br">Brazil</Select.Item>
 							<Select.Item value="sp">Spain</Select.Item>
 						</Select.Root>
@@ -133,7 +133,7 @@ export default function Home() {
 							Timezone
 						</label>
 
-						<Select.Root placeholder="Select a timezone">
+						<Select.Root id="timezone" placeholder="Select a timezone">
 							<Select.Item value="utc3">Brasília Time (UTC-03:00)</Select.Item>
 							<Select.Item value="utc8">
 								Pacific Standard Time (UTC-08:00)

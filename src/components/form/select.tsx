@@ -22,13 +22,17 @@ export function Item({ children, ...props }: SelectItemProps) {
 }
 
 interface SelectProps extends Select.SelectProps {
+	id?: string
 	placeholder?: string
 }
 
-export function Root({ children, placeholder, ...props }: SelectProps) {
+export function Root({ children, id, placeholder, ...props }: SelectProps) {
 	return (
 		<Select.Root {...props}>
-			<Select.Trigger className="flex h-11 w-full items-center justify-between gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm data-[placeholder]:text-zinc-600">
+			<Select.Trigger
+				id={id}
+				className="flex h-11 w-full items-center justify-between gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100 data-[placeholder]:text-zinc-600"
+			>
 				<Select.Value className="text-black" placeholder={placeholder} />
 				<Select.Icon>
 					<ChevronDown className="h-5 w-5 text-zinc-500" />
