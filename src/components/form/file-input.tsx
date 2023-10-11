@@ -10,6 +10,7 @@ import {
 	useState,
 } from 'react'
 import { Trash2, UploadCloud, User } from 'lucide-react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { formatBytes } from '@/utils/format-bytes'
 
 interface FileInputContextType {
@@ -115,9 +116,10 @@ export function ImagePreview() {
 
 export function FileList() {
 	const { files } = useFileInput()
+	const [parent] = useAutoAnimate()
 
 	return (
-		<div className="mt-4 space-y-3">
+		<div ref={parent} className="mt-4 space-y-3">
 			{files.map((file) => (
 				<div
 					key={file.name}
