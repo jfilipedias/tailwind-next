@@ -10,6 +10,7 @@ import {
 	useState,
 } from 'react'
 import { CheckCircle2, Trash2, UploadCloud, User } from 'lucide-react'
+import { VariantProps, tv } from 'tailwind-variants'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Button } from '@/components/button'
 import { formatBytes } from '@/utils/format-bytes'
@@ -115,17 +116,43 @@ export function ImagePreview() {
 	)
 }
 
-interface FileItemProps {
+const fileItemStyles = tv({
+	slots: {
+		root: 'group flex items-start gap-4 rounded-lg border p-4',
+		icon: 'rounded-full border-4 border-violet-100 bg-violet-200 p-2 text-violet-600',
+		deleteButton: 'text-zinc-500',
+	},
+	variants: {
+		state: {
+			progress: {
+				root: 'border-zinc-200',
+			},
+			complete: {
+				root: 'border-violet-500',
+			},
+			error: {
+				root: 'bg-error-25 border-error-300',
+				icon: 'border-error-50 bg-error-100 text-error-600',
+				deleteButton: 'text-error-700 hover:text-error-900',
+			},
+		},
+	},
+	defaultVariants: {
+		state: 'progress',
+	},
+})
+
+interface FileItemProps extends VariantProps<typeof fileItemStyles> {
 	name: string
 	size: number
 }
 
-function FileItem({ name, size }: FileItemProps) {
-	const state = 'error' as 'progress' | 'error' | 'completed'
+function FileItem({ name, size, state }: FileItemProps) {
+	const { root, icon, deleteButton } = fileItemStyles({ state })
 
 	return (
-		<div className="group flex items-start gap-4 rounded-lg border border-zinc-200 p-4">
-			<div className="rounded-full border-4 border-violet-100 bg-violet-200 p-2 text-violet-600">
+		<div className={root()}>
+			<div className={icon()}>
 				<UploadCloud className="h-4 w-4" />
 			</div>
 
@@ -156,21 +183,26 @@ function FileItem({ name, size }: FileItemProps) {
 						<div className="h-2 flex-1 rounded-full bg-zinc-100">
 							<div
 								className="h-2 rounded-full bg-violet-600"
-								style={{ width: state === 'completed' ? '100%' : '80%' }}
+								style={{ width: state === 'complete' ? '100%' : '80%' }}
 							/>
 						</div>
 						<span className="text-sm font-medium text-zinc-700">
-							{state === 'completed' ? '100%' : '80%'}
+							{state === 'complete' ? '100%' : '80%'}
 						</span>
 					</div>
 				</div>
 			)}
 
-			{state === 'completed' ? (
+			{state === 'complete' ? (
 				<CheckCircle2 className="h-5 w-5 fill-violet-600 text-white" />
 			) : (
-				<Button variant="ghost" type="button" title="Remove">
-					<Trash2 className="h-5 w-5 text-zinc-500" />
+				<Button
+					variant="ghost"
+					type="button"
+					title="Remove"
+					className={deleteButton()}
+				>
+					<Trash2 className="h-5 w-5" />
 				</Button>
 			)}
 		</div>
@@ -184,7 +216,12 @@ export function FileList() {
 	return (
 		<div ref={parent} className="mt-4 space-y-3">
 			{files.map((file) => (
-				<FileItem key={file.name} name={file.name} size={file.size} />
+				<FileItem
+					key={file.name}
+					name={file.name}
+					size={file.size}
+					state="progress"
+				/>
 			))}
 		</div>
 	)
