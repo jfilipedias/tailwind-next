@@ -8,7 +8,7 @@ import { Textarea } from '@/components/form/text-area'
 
 export default function Home() {
 	return (
-		<main className="space-y-6 px-8 pb-12 pt-8">
+		<>
 			<h1 className="text-3xl font-medium text-zinc-900">Settings</h1>
 
 			<SettingsTabs />
@@ -216,6 +216,6 @@ export default function Home() {
 					</div>
 				</form>
 			</div>
-		</main>
+		</>
 	)
 }
