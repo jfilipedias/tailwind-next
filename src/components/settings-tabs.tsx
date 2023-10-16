@@ -35,7 +35,7 @@ export function SettingsTabs() {
 		<Tabs.Root value={activeTab} onValueChange={setActiveTab}>
 			<ScrollArea.Root className="w-full" type="scroll">
 				<ScrollArea.Viewport className="w-full overflow-x-scroll px-0.5 pt-1.5">
-					<Tabs.List className="flex w-full items-center gap-4 border-b border-zinc-200">
+					<Tabs.List className="flex w-full items-center gap-4 border-b border-zinc-200 dark:border-zinc-700">
 						<TabItem value="tab1" active={activeTab === 'tab1'}>
 							My details
 						</TabItem>
